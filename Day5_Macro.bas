@@ -24,13 +24,18 @@ Function CopyRowsAboveThreshold(wsSrc As Worksheet, wsDst As Worksheet, _
 
 End Function
 
+
 Function SortByColumnAscending(ws As Worksheet, col As Long)
     
     '指定した列を昇順で並べ替える（1行目は見出しとして除外）
     
-
     Dim rng As Range
     Dim colCount As Long
+
+    'データが見出しのみならソート不要
+    If ws.UsedRange.Rows.Count <= 1 Then
+        Exit Function
+    End If
 
     colCount = ws.UsedRange.Columns.Count
 
@@ -45,6 +50,7 @@ Function SortByColumnAscending(ws As Worksheet, col As Long)
     ws.Sort.Apply
 
 End Function
+
 
 Sub Day5_Macro()
     
